@@ -11,6 +11,7 @@
 
     <color name="text_color">#1A1B22</color>
     <color name="bg_color">#3772E7</color>
+    <color name="bg_color_dark">#E5E5E5</color>
 
     <color name="settings_bg_color">#F5F5F5</color>
     <color name="switch_track_color">#CECFD2</color>

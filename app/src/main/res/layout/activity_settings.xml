@@ -43,8 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/SettingsAcMenuItemIcon"
-            app:trackTint="@color/switch_track_color"
-            app:thumbTint="@color/switch_thumb_color" />
+            android:alpha="0.48"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
