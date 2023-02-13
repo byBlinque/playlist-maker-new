@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/settings_bg_color">
+    style="@style/SettingsAcBG">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/arrow_back"
-            android:maxWidth="16dp" />
+            android:maxWidth="16dp"
+            style="@style/SettingsToolbarColor"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,8 +28,8 @@
             android:letterSpacing="0"
             android:textAllCaps="false"
             android:textSize="@dimen/text_header_size"
-            android:textColor="@color/text_color"
-            android:layout_marginLeft="28dp" />
+            android:layout_marginLeft="28dp"
+            style="@style/SettingsToolbarColor"/>
     </LinearLayout>
     <RelativeLayout
         android:layout_marginTop="40dp"
@@ -46,6 +47,7 @@
             android:alpha="0.48"/>
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/settings_ac_share"
         android:layout_width="match_parent"
         style="@style/SettingsAcMenuItemWrapper">
         <TextView

@@ -40,4 +40,8 @@
         <item name="trackTint">@color/bg_color</item>
         <item name="thumbTint">@color/bg_color</item>
     </style>
+    <style name="SettingsToolbarColor">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:tint">@color/white</item>
+    </style>
 </resources>
