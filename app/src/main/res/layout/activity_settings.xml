@@ -64,6 +64,7 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/settings_ac_support"
         android:layout_width="match_parent"
         style="@style/SettingsAcMenuItemWrapper">
         <TextView
@@ -80,6 +81,7 @@
             />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/settings_ac_agreement"
         android:layout_width="match_parent"
         style="@style/SettingsAcMenuItemWrapper">
         <TextView
