@@ -44,4 +44,19 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:tint">@color/white</item>
     </style>
+    <style name="SearchToolbarColor">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:tint">@color/white</item>
+    </style>
+    <style name="SearchAcBG">
+        <item name="android:background">@color/bg_color_dark</item>
+    </style>
+    <style name="SearchBarTextIconStyle">
+        <item name="tint">@color/yp_black</item>
+        <item name="android:textColorHint">@color/yp_black</item>
+        <item name="android:textColor">@color/yp_black</item>
+    </style>
+    <style name="SearchBarBGStyle">
+        <item name="android:background">@color/yp_white</item>
+    </style>
 </resources>
