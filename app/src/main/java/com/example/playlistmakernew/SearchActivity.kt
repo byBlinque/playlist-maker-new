@@ -13,15 +13,17 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val SEARCH_EDIT_TEXT = "SEARCH_EDIT_TEXT"
     }
-    val searchET: EditText = findViewById<EditText>(R.id.search_et)
+    var searchText: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        //searchET = findViewById<EditText>(R.id.search_et)
+        val searchET = findViewById<EditText>(R.id.search_et)
         val clearButton = findViewById<ImageView>(R.id.clear_btn)
         val backButton = findViewById<ImageView>(R.id.back_btn)
+
+        searchET.setText(searchText)
 
         clearButton.setOnClickListener {
             searchET.setText("")
@@ -38,6 +40,7 @@ class SearchActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = clearButtonVisibility(s)
+                searchText = s.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -48,12 +51,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString(SEARCH_EDIT_TEXT, searchET.text.toString())
+        outState.putString(SEARCH_EDIT_TEXT, searchText)
         super.onSaveInstanceState(outState)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        searchET.setText(savedInstanceState.getString(SEARCH_EDIT_TEXT,""))
+        searchText = savedInstanceState.getString(SEARCH_EDIT_TEXT,"")
         super.onRestoreInstanceState(savedInstanceState)
     }
 
