@@ -35,6 +35,7 @@
             android:text="@string/button_search_text"
             app:icon="@drawable/light_mode"
             style="@style/MainAcButton"
+            app:iconTint="@color/yp_black"
             android:layout_marginBottom="@dimen/main_button_margin_bot"/>
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_mediateka_btn"
@@ -43,6 +44,7 @@
             android:layout_weight="1"
             android:text="@string/button_mediateka_text"
             style="@style/MainAcButton"
+            app:iconTint="@color/yp_black"
             app:icon="@drawable/vector"
             android:layout_marginBottom="@dimen/main_button_margin_bot"/>
         <com.google.android.material.button.MaterialButton
@@ -52,6 +54,7 @@
             android:layout_weight="1"
             android:text="@string/button_settings_text"
             style="@style/MainAcButton"
+            app:iconTint="@color/yp_black"
             app:icon="@drawable/settings" />
     </LinearLayout>
 </LinearLayout>
