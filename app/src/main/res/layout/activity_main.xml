@@ -2,11 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MainAcBG"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical"
-    style="@style/MainAcBG">
+    tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,39 +22,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="28dp">
+        android:layout_marginHorizontal="@dimen/main_container_horizontal_margin"
+        android:layout_marginBottom="28dp"
+        android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_search_btn"
+            style="@style/MainAcButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/main_button_margin_bot"
             android:layout_weight="1"
             android:text="@string/button_search_text"
-            app:icon="@drawable/light_mode"
-            style="@style/MainAcButton"
-            app:iconTint="@color/yp_black"
-            android:layout_marginBottom="@dimen/main_button_margin_bot"/>
+            app:icon="@drawable/light_mode" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_mediateka_btn"
+            style="@style/MainAcButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/main_button_margin_bot"
             android:layout_weight="1"
             android:text="@string/button_mediateka_text"
-            style="@style/MainAcButton"
-            app:iconTint="@color/yp_black"
-            app:icon="@drawable/vector"
-            android:layout_marginBottom="@dimen/main_button_margin_bot"/>
+            app:icon="@drawable/vector" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/main_settings_btn"
+            style="@style/MainAcButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="@string/button_settings_text"
-            style="@style/MainAcButton"
-            app:iconTint="@color/yp_black"
             app:icon="@drawable/settings" />
     </LinearLayout>
 </LinearLayout>
