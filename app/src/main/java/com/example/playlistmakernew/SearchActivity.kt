@@ -1,10 +1,12 @@
 package com.example.playlistmakernew
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -27,6 +29,11 @@ class SearchActivity : AppCompatActivity() {
 
         clearButton.setOnClickListener {
             searchET.setText("")
+            val view: View? = this.currentFocus
+            if (view != null) {
+                val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0)
+            }
         }
 
         backButton.setOnClickListener {
