@@ -15,4 +15,7 @@
     <string name="settings_support_intent_email_text">Спасибо разработчикам и разработчицам за крутое приложение!</string>
     <string name="settings_agreement">https://yandex.ru/legal/practicum_offer/</string>
 
+    <string name="search_et_hint">Поиск</string>
+    <string name="search_btn_clear_text">Очистить поисковый запрос</string>
+
 </resources>
