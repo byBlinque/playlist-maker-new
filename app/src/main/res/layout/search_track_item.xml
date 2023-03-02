@@ -28,6 +28,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lines="1"
+                android:ellipsize="end"
                 tools:text="Smells Like Teen Spirit"
                 style="@style/search_track_item_title_style" />
 
