@@ -8,12 +8,16 @@
 
     <dimen name="text_header_size">22sp</dimen>
     <dimen name="settings_menu_text_size">16sp</dimen>
-    <dimen name="settings_menu_item_height_size">61dp</dimen>
+    <dimen name="settings_menu_item_height_size">60dp</dimen>
     <dimen name="settings_menu_item_padding_horizontal">16dp</dimen>
 
     <dimen name="toolbar_margin">20dp</dimen>
     <dimen name="search_image_size">12dp</dimen>
     <dimen name="search_image_margin">12dp</dimen>
+
+    <dimen name="search_track_item_small_margin">8dp</dimen>
+    <dimen name="search_track_item_title_size">16dp</dimen>
+    <dimen name="search_track_item_subtitle_size">11dp</dimen>
 
 
 
