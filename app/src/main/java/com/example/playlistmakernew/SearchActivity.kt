@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class SearchActivity : AppCompatActivity() {
     companion object {
@@ -49,6 +51,11 @@ class SearchActivity : AppCompatActivity() {
                 "5:03",
                 "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/a0/4d/c4/a04dc484-03cc-02aa-fa82-5334fcb4bc16/18UMGIM24878.rgb.jpg/100x100bb.jpg")
         )
+
+        val searchTrackRV: RecyclerView = findViewById(R.id.search_ac_rv)
+        searchTrackRV.layoutManager = LinearLayoutManager(this)
+        val searchTrackAdapter = SearchTrackAdapter(trackArray)
+        searchTrackRV.adapter = searchTrackAdapter
 
         clearButton.setOnClickListener {
             searchET.setText("")
