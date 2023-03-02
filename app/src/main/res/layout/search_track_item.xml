@@ -27,12 +27,12 @@
 
             <TextView
                 android:id="@+id/track_name"
+                style="@style/search_track_item_title_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="1"
                 android:ellipsize="end"
-                tools:text="Smells Like Teen Spirit"
-                style="@style/search_track_item_title_style" />
+                android:lines="1"
+                tools:text="Smells Like Teen Spirit" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,35 +41,35 @@
 
                 <TextView
                     android:id="@+id/artist_name"
+                    style="@style/search_track_item_subtitle_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Nirvana"
-                    style="@style/search_track_item_subtitle_style" />
+                    tools:text="Nirvana" />
 
                 <ImageView
+                    style="@style/search_track_item_subtitle_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/center_dot"
-                    style="@style/search_track_item_subtitle_style"/>
+                    android:src="@drawable/center_dot" />
 
                 <TextView
                     android:id="@+id/track_time"
+                    style="@style/search_track_item_subtitle_style"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="2:55"
-                    style="@style/search_track_item_subtitle_style" />
+                    tools:text="2:55" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <ImageView
+            style="@style/search_track_item_subtitle_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:src="@drawable/forward_arrow_final"
-            style="@style/search_track_item_subtitle_style"/>
+            android:src="@drawable/forward_arrow_final" />
     </LinearLayout>
 
 </LinearLayout>
