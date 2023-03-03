@@ -21,7 +21,7 @@ class SearchTrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         trackTime.text = track.trackTime
         Glide.with(itemView.context)
             .load(track.artworkUrl100)
-            .placeholder(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.track_poster_placeholder)
             .centerCrop()
             .transform(RoundedCorners(2))
             .into(trackPoster)
