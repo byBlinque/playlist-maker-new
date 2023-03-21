@@ -71,7 +71,9 @@
                 android:hint="@string/search_et_hint"
                 android:maxLines="1"
                 android:textSize="16sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:imeOptions="actionDone"
+                android:singleLine="true"/>
 
             <ImageView
                 android:id="@+id/clear_btn"
