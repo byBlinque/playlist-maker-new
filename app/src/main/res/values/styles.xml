@@ -84,4 +84,26 @@
         <item name="android:textSize">@dimen/search_track_item_subtitle_size</item>
         <item name="tint">@color/yp_text_gray</item>
     </style>
+
+    <style name="search_error_text_style">
+        <item name="android:fontFamily">@font/ys_display_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textColor">@color/yp_black</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="search_error_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">110dp</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="search_refresh_btn_style">
+        <item name="android:backgroundTint">@color/yp_black</item>
+        <item name="android:textColor">@color/yp_white</item>
+    </style>
 </resources>

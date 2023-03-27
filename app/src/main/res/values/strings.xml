@@ -17,5 +17,8 @@
 
     <string name="search_et_hint">Поиск</string>
     <string name="search_btn_clear_text">Очистить поисковый запрос</string>
+    <string name="search_nothing_found">Ничего не нашлось</string>
+    <string name="search_internet_connection">Проблемы со связью\n\nЗагрузка не удалась. Проверьте подключение к интернету</string>
+    <string name="search_refresh">Обновить</string>
 
 </resources>
