@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@ class SearchActivity : AppCompatActivity() {
     lateinit var searchHistoryRV: RecyclerView
     lateinit var clearHistoryBtn: MaterialCardView
     lateinit var searchHistoryAdapter: SearchHistoryAdapter
+    lateinit var searchHistoryLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -72,6 +74,7 @@ class SearchActivity : AppCompatActivity() {
         searchHistoryTV = findViewById(R.id.search_history_tv)
         searchHistoryRV = findViewById(R.id.search_history_rv)
         clearHistoryBtn = findViewById(R.id.clear_history_btn)
+        searchHistoryLayout = findViewById(R.id.search_history_layout)
 
         //sharedPrefs.edit().clear().apply()
         SearchHistory(sharedPrefs).getTracksHistory()
@@ -91,9 +94,15 @@ class SearchActivity : AppCompatActivity() {
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
         }
 
+        searchET.setOnFocusChangeListener { view, hasFocus ->
+            searchHistoryLayout.visibility = if (hasFocus && searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+        }
+
         clearHistoryBtn.setOnClickListener {
-            //trackHistoryArray.clear()
-            //searchHistoryAdapter.notifyDataSetChanged()
+            SearchHistory(sharedPrefs).clearSearchHistory()
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
+            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
         }
 
         clearButton.setOnClickListener {
@@ -104,8 +113,12 @@ class SearchActivity : AppCompatActivity() {
                     getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0)
             }
+            searchTrackRV.visibility = View.GONE
             clearAdapter()
             turnOffErrors()
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
+            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
         }
 
         backButton.setOnClickListener {
@@ -115,6 +128,7 @@ class SearchActivity : AppCompatActivity() {
         searchET.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 request(searchET.text.toString())
+                searchTrackRV.visibility = View.VISIBLE
                 true
             }
             false
@@ -122,6 +136,7 @@ class SearchActivity : AppCompatActivity() {
 
         refreshBtn.setOnClickListener {
             request(lastRequest)
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
         }
 
         val textWatcher = object : TextWatcher {
@@ -132,6 +147,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = clearButtonVisibility(s)
                 searchText = s.toString()
+                searchHistoryLayout.visibility = if (searchET.hasFocus() && s?.isEmpty() == true && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+                searchTrackRV.visibility = if (s?.isEmpty() == true) View.GONE else View.VISIBLE
             }
 
             override fun afterTextChanged(s: Editable?) {

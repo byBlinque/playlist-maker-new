@@ -41,6 +41,11 @@ class SearchHistory(val sharedPrefs: SharedPreferences) : AppCompatActivity() {
         tracksHistoryList = Gson().fromJson(jsonString, typeToken)
     }
 
+    fun clearSearchHistory() {
+        sharedPrefs.edit().remove(TRACKS_HISTORY_KEY).apply()
+        getTracksHistory()
+    }
+
     companion object {
         const val TRACKS_HISTORY_SIZE = 10
         var tracksHistoryList = mutableListOf<Track>()
