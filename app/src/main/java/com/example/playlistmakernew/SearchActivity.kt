@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -16,7 +15,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.gson.Gson
 import retrofit2.*
 
 import retrofit2.converter.gson.GsonConverterFactory
@@ -38,20 +36,20 @@ class SearchActivity : AppCompatActivity() {
     var lastRequest: String = ""
     var trackArray = mutableListOf<Track>()
 
-    lateinit var nothingFoundLight: ImageView
-    lateinit var nothingFoundDark: ImageView
-    lateinit var nothingFoundTV: TextView
-    lateinit var internetConnectionLight: ImageView
-    lateinit var internetConnectionDark: ImageView
-    lateinit var internetConnectionTV: TextView
-    lateinit var refreshBtn: MaterialCardView
-    lateinit var searchTrackAdapter: SearchTrackAdapter
-    lateinit var searchET: EditText
-    lateinit var searchHistoryTV: TextView
-    lateinit var searchHistoryRV: RecyclerView
-    lateinit var clearHistoryBtn: MaterialCardView
-    lateinit var searchHistoryAdapter: SearchHistoryAdapter
-    lateinit var searchHistoryLayout: LinearLayout
+    private lateinit var nothingFoundLight: ImageView
+    private lateinit var nothingFoundDark: ImageView
+    private lateinit var nothingFoundTV: TextView
+    private lateinit var internetConnectionLight: ImageView
+    private lateinit var internetConnectionDark: ImageView
+    private lateinit var internetConnectionTV: TextView
+    private lateinit var refreshBtn: MaterialCardView
+    private lateinit var searchTrackAdapter: SearchTrackAdapter
+    private lateinit var searchET: EditText
+    private lateinit var searchHistoryTV: TextView
+    private lateinit var searchHistoryRV: RecyclerView
+    private lateinit var clearHistoryBtn: MaterialCardView
+    private lateinit var searchHistoryAdapter: SearchTrackAdapter
+    private lateinit var searchHistoryLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -77,7 +75,7 @@ class SearchActivity : AppCompatActivity() {
         searchHistoryLayout = findViewById(R.id.search_history_layout)
 
         //sharedPrefs.edit().clear().apply()
-        SearchHistory(sharedPrefs).getTracksHistory()
+        SearchHistory(sharedPrefs).updateLocalTrackHistory()
 
         searchET.setText(searchText)
 
@@ -86,7 +84,7 @@ class SearchActivity : AppCompatActivity() {
         searchTrackRV.adapter = searchTrackAdapter
 
         searchHistoryRV.layoutManager = LinearLayoutManager(this)
-        searchHistoryAdapter = SearchHistoryAdapter(SearchHistory.tracksHistoryList)
+        searchHistoryAdapter = SearchTrackAdapter(SearchHistory.tracksHistoryList, sharedPrefs)
         searchHistoryRV.adapter = searchHistoryAdapter
 
         sharedPrefs.registerOnSharedPreferenceChangeListener { sharedPreferences, key ->

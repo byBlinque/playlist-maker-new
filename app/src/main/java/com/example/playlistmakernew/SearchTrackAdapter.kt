@@ -27,4 +27,10 @@ class SearchTrackAdapter(
         return tracks.size
     }
 
+    fun updateAdapter(newItems: MutableList<Track>) {
+        tracks.clear()
+        tracks.addAll(newItems)
+        this.notifyDataSetChanged()
+    }
+
 }
