@@ -1,8 +1,6 @@
 package com.example.playlistmakernew
 
-import android.content.Context
 import android.content.res.Configuration
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -10,12 +8,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Adapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -38,22 +34,29 @@ class SearchActivity : AppCompatActivity() {
     private val iTunesService = retrofit.create(iTunesAPI::class.java)
 
     var lastRequest: String = ""
-    var trackArray: ArrayList<Track> = arrayListOf()
+    var trackArray = mutableListOf<Track>()
 
-    lateinit var nothingFoundLight: ImageView
-    lateinit var nothingFoundDark: ImageView
-    lateinit var nothingFoundTV: TextView
-    lateinit var internetConnectionLight: ImageView
-    lateinit var internetConnectionDark: ImageView
-    lateinit var internetConnectionTV: TextView
-    lateinit var refreshBtn: MaterialCardView
-    lateinit var searchTrackAdapter: SearchTrackAdapter
-    lateinit var searchET: EditText
+    private lateinit var nothingFoundLight: ImageView
+    private lateinit var nothingFoundDark: ImageView
+    private lateinit var nothingFoundTV: TextView
+    private lateinit var internetConnectionLight: ImageView
+    private lateinit var internetConnectionDark: ImageView
+    private lateinit var internetConnectionTV: TextView
+    private lateinit var refreshBtn: MaterialCardView
+    private lateinit var searchTrackAdapter: SearchTrackAdapter
+    private lateinit var searchET: EditText
+    private lateinit var searchHistoryTV: TextView
+    private lateinit var searchHistoryRV: RecyclerView
+    private lateinit var clearHistoryBtn: MaterialCardView
+    private lateinit var searchHistoryAdapter: SearchTrackAdapter
+    private lateinit var searchHistoryLayout: LinearLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        val sharedPrefs = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE)
 
         val clearButton = findViewById<ImageView>(R.id.clear_btn)
         val backButton = findViewById<ImageView>(R.id.back_btn)
@@ -66,47 +69,39 @@ class SearchActivity : AppCompatActivity() {
         internetConnectionDark = findViewById(R.id.internet_connection_dark)
         internetConnectionTV = findViewById(R.id.internet_connection_tv)
         refreshBtn = findViewById(R.id.refresh_btn)
+        searchHistoryTV = findViewById(R.id.search_history_tv)
+        searchHistoryRV = findViewById(R.id.search_history_rv)
+        clearHistoryBtn = findViewById(R.id.clear_history_btn)
+        searchHistoryLayout = findViewById(R.id.search_history_layout)
+
+        //sharedPrefs.edit().clear().apply()
+        SearchHistory(sharedPrefs).updateLocalTrackHistory()
 
         searchET.setText(searchText)
 
-        /*val trackArray: ArrayList<Track> = arrayListOf(
-            Track(
-                "Smells Like Teen Spirit",
-                "Nirvana",
-                "5:01",
-                "https://is5-ssl.mzstatic.com/image/thumb/Music115/v4/7b/58/c2/7b58c21a-2b51-2bb2-e59a-9bb9b96ad8c3/00602567924166.rgb.jpg/100x100bb.jpg"
-            ),
-            Track(
-                "Billie Jean",
-                "Michael Jackson",
-                "4:35",
-                "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/3d/9d/38/3d9d3811-71f0-3a0e-1ada-3004e56ff852/827969428726.jpg/100x100bb.jpg"
-            ),
-            Track(
-                "Stayin' Alive",
-                "Bee Gees",
-                "4:10",
-                "https://is4-ssl.mzstatic.com/image/thumb/Music115/v4/1f/80/1f/1f801fc1-8c0f-ea3e-d3e5-387c6619619e/16UMGIM86640.rgb.jpg/100x100bb.jpg"
-            ),
-            Track(
-                "Whole Lotta Love",
-                "Led Zeppelin",
-                "5:33",
-                "https://is2-ssl.mzstatic.com/image/thumb/Music62/v4/7e/17/e3/7e17e33f-2efa-2a36-e916-7f808576cf6b/mzm.fyigqcbs.jpg/100x100bb.jpg"
-            ),
-            Track(
-                "Sweet Child O'Mine",
-                "Guns N' Roses",
-                "5:03",
-                "https://is5-ssl.mzstatic.com/image/thumb/Music125/v4/a0/4d/c4/a04dc484-03cc-02aa-fa82-5334fcb4bc16/18UMGIM24878.rgb.jpg/100x100bb.jpg"
-            )
-        )*/
-
-
-
         searchTrackRV.layoutManager = LinearLayoutManager(this)
-        searchTrackAdapter = SearchTrackAdapter(trackArray)
+        searchTrackAdapter = SearchTrackAdapter(trackArray, sharedPrefs)
         searchTrackRV.adapter = searchTrackAdapter
+
+        searchHistoryRV.layoutManager = LinearLayoutManager(this)
+        searchHistoryAdapter = SearchTrackAdapter(SearchHistory.tracksHistoryList, sharedPrefs)
+        searchHistoryRV.adapter = searchHistoryAdapter
+
+        sharedPrefs.registerOnSharedPreferenceChangeListener { sharedPreferences, key ->
+            //Log.d("LISTENER", "Пришли")
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
+        }
+
+        searchET.setOnFocusChangeListener { view, hasFocus ->
+            searchHistoryLayout.visibility = if (hasFocus && searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+        }
+
+        clearHistoryBtn.setOnClickListener {
+            SearchHistory(sharedPrefs).clearSearchHistory()
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
+            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
+        }
 
         clearButton.setOnClickListener {
             searchET.setText("")
@@ -116,8 +111,12 @@ class SearchActivity : AppCompatActivity() {
                     getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0)
             }
+            searchTrackRV.visibility = View.GONE
             clearAdapter()
             turnOffErrors()
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
+            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
         }
 
         backButton.setOnClickListener {
@@ -127,6 +126,7 @@ class SearchActivity : AppCompatActivity() {
         searchET.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 request(searchET.text.toString())
+                searchTrackRV.visibility = View.VISIBLE
                 true
             }
             false
@@ -134,6 +134,7 @@ class SearchActivity : AppCompatActivity() {
 
         refreshBtn.setOnClickListener {
             request(lastRequest)
+            searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
         }
 
         val textWatcher = object : TextWatcher {
@@ -144,6 +145,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = clearButtonVisibility(s)
                 searchText = s.toString()
+                searchHistoryLayout.visibility = if (searchET.hasFocus() && s?.isEmpty() == true && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+                searchTrackRV.visibility = if (s?.isEmpty() == true) View.GONE else View.VISIBLE
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -189,6 +192,18 @@ class SearchActivity : AppCompatActivity() {
         internetConnectionDark.visibility = View.GONE
         internetConnectionTV.visibility = View.GONE
         refreshBtn.visibility = View.GONE
+    }
+
+    private fun hideSearchHistory() {
+        searchHistoryTV.visibility = View.GONE
+        searchHistoryRV.visibility = View.GONE
+        clearHistoryBtn.visibility = View.GONE
+    }
+
+    private fun showSearchHistory() {
+        searchHistoryTV.visibility = View.VISIBLE
+        searchHistoryRV.visibility = View.VISIBLE
+        clearHistoryBtn.visibility = View.VISIBLE
     }
 
     private fun clearAdapter() {

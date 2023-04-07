@@ -19,6 +19,9 @@
     <dimen name="search_track_item_title_size">16dp</dimen>
     <dimen name="search_track_item_subtitle_size">11dp</dimen>
 
+    <dimen name="button_text_margin_horizontal">14dp</dimen>
+    <dimen name="button_text_margin_vertical">10dp</dimen>
+
 
 
 </resources>

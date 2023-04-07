@@ -28,4 +28,5 @@ class SearchTrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .transform(RoundedCorners(2))
             .into(trackPoster)
     }
+
 }

@@ -46,11 +46,18 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_dark_theme_text" />
 
-        <androidx.appcompat.widget.SwitchCompat
+        <!--<androidx.appcompat.widget.SwitchCompat
             style="@style/SettingsAcMenuItemIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.48" />
+            android:alpha="0.48" />-->
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/themeSwitcher"
+            style="@style/SettingsAcMenuItemIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.48"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -109,4 +116,5 @@
             android:maxWidth="8dp"
             android:src="@drawable/forward_arrow_final" />
     </RelativeLayout>
+
 </LinearLayout>
