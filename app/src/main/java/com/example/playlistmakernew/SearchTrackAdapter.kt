@@ -1,10 +1,10 @@
 package com.example.playlistmakernew
 
-import android.app.Application
+import android.content.Intent
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class SearchTrackAdapter(
@@ -20,6 +20,9 @@ class SearchTrackAdapter(
         holder.bind(tracks[position])
         holder.itemView.setOnClickListener {
             SearchHistory(sharedPrefs).addTrackToHistory(tracks[position])
+            val context = holder.itemView.context
+            val audioPlayerIntent = Intent(context, AudioPlayerActivity::class.java)
+            context.startActivity(audioPlayerIntent)
         }
     }
 

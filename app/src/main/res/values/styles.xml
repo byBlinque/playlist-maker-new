@@ -108,4 +108,29 @@
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/ys_display_medium</item>
     </style>
+
+    <style name="play_button_style">
+        <item name="tint">@color/yp_black</item>
+        <item name="backgroundTint">@color/yp_white</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="side_player_buttons_style">
+        <item name="tint">@color/yp_white</item>
+        <item name="backgroundTint">@color/yp_black25</item>
+        <item name="borderWidth">0dp</item>
+        <item name="elevation">0dp</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <style name="audioplayer_features_title_style">
+        <item name="android:textSize">@dimen/audioplayer_features_text_size</item>
+        <item name="android:fontFamily">@font/ys_display_regular</item>
+        <item name="android:textColor">@color/yp_text_gray</item>
+        <item name="android:layout_marginBottom">@dimen/audioplayer_features_margin_bottom_size
+        </item>
+    </style>
+
 </resources>

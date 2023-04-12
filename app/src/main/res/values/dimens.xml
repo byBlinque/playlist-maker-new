@@ -16,11 +16,17 @@
     <dimen name="search_image_margin">12dp</dimen>
 
     <dimen name="search_track_item_small_margin">8dp</dimen>
-    <dimen name="search_track_item_title_size">16dp</dimen>
-    <dimen name="search_track_item_subtitle_size">11dp</dimen>
+    <dimen name="search_track_item_title_size">16sp</dimen>
+    <dimen name="search_track_item_subtitle_size">11sp</dimen>
 
     <dimen name="button_text_margin_horizontal">14dp</dimen>
     <dimen name="button_text_margin_vertical">10dp</dimen>
+
+    <dimen name="audioplayer_big_guide_size">24dp</dimen>
+    <dimen name="audioplayer_small_guide_size">16dp</dimen>
+
+    <dimen name="audioplayer_features_margin_bottom_size">16dp</dimen>
+    <dimen name="audioplayer_features_text_size">14sp</dimen>
 
 
 
