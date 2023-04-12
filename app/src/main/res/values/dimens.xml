@@ -25,7 +25,7 @@
     <dimen name="audioplayer_big_guide_size">24dp</dimen>
     <dimen name="audioplayer_small_guide_size">16dp</dimen>
 
-    <dimen name="audioplayer_features_margin_bottom_size">16dp</dimen>
+    <dimen name="audioplayer_features_margin_top_size">16dp</dimen>
     <dimen name="audioplayer_features_text_size">14sp</dimen>
 
 
