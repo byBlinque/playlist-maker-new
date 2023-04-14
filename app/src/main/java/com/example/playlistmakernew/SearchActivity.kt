@@ -88,7 +88,6 @@ class SearchActivity : AppCompatActivity() {
         searchHistoryRV.adapter = searchHistoryAdapter
 
         sharedPrefs.registerOnSharedPreferenceChangeListener { sharedPreferences, key ->
-            //Log.d("LISTENER", "Пришли")
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
         }
 

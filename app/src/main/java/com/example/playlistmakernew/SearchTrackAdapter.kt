@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import java.io.Serializable
 
 class SearchTrackAdapter(
     private val tracks: MutableList<Track>,
@@ -22,6 +24,7 @@ class SearchTrackAdapter(
             SearchHistory(sharedPrefs).addTrackToHistory(tracks[position])
             val context = holder.itemView.context
             val audioPlayerIntent = Intent(context, AudioPlayerActivity::class.java)
+            audioPlayerIntent.putExtra("selectedTrack",Gson().toJson(SearchHistory.tracksHistoryList[0]))
             context.startActivity(audioPlayerIntent)
         }
     }

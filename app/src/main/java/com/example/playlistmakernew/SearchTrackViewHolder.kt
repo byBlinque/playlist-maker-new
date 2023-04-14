@@ -25,7 +25,7 @@ class SearchTrackViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             .load(track.artworkUrl100)
             .placeholder(R.drawable.track_poster_placeholder)
             .centerCrop()
-            .transform(RoundedCorners(2))
+            .transform(RoundedCorners(itemView.resources.getDimensionPixelSize(R.dimen.search_track_cover_corner_size)))
             .into(trackPoster)
     }
 

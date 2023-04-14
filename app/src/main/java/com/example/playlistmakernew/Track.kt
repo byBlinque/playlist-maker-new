@@ -1,6 +1,7 @@
 package com.example.playlistmakernew
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Track(
     var trackId: Int,
@@ -13,5 +14,6 @@ data class Track(
     var primaryGenreName: String,
     var country: String
 ) {
+    fun getCoverArtwork(): String = artworkUrl100.replaceAfterLast('/',"512x512bb.jpg")
 
 }
