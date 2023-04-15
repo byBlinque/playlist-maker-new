@@ -12,7 +12,7 @@
     <dimen name="settings_menu_item_padding_horizontal">16dp</dimen>
 
     <dimen name="toolbar_margin">20dp</dimen>
-    <dimen name="search_image_size">12dp</dimen>
+    <dimen name="search_image_size">18dp</dimen>
     <dimen name="search_image_margin">12dp</dimen>
 
     <dimen name="search_track_item_small_margin">8dp</dimen>

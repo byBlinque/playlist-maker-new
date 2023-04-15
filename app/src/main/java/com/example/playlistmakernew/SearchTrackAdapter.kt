@@ -12,9 +12,10 @@ import java.io.Serializable
 class SearchTrackAdapter(
     private val tracks: MutableList<Track>,
     private val sharedPrefs: SharedPreferences
-) : RecyclerView.Adapter<SearchTrackViewHolder>(){
+) : RecyclerView.Adapter<SearchTrackViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchTrackViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.search_track_item, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.search_track_item, parent, false)
         return SearchTrackViewHolder(view)
     }
 
@@ -24,7 +25,10 @@ class SearchTrackAdapter(
             SearchHistory(sharedPrefs).addTrackToHistory(tracks[position])
             val context = holder.itemView.context
             val audioPlayerIntent = Intent(context, AudioPlayerActivity::class.java)
-            audioPlayerIntent.putExtra("selectedTrack",Gson().toJson(SearchHistory.tracksHistoryList[0]))
+            audioPlayerIntent.putExtra(
+                "selectedTrack",
+                Gson().toJson(SearchHistory.tracksHistoryList[0])
+            )
             context.startActivity(audioPlayerIntent)
         }
     }
