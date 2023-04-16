@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="28dp">
+        android:paddingBottom="@dimen/audioplayer_padding_bot_size">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/left_big_guide"
@@ -48,7 +48,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/toolbar_margin"
             android:layout_marginTop="@dimen/toolbar_margin"
-            android:maxWidth="16dp"
+            android:maxWidth="@dimen/toolbar_arrow_max_width"
             android:src="@drawable/arrow_back"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
             android:id="@+id/track_cover"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="@dimen/audioplayer_poster_margin_top"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@+id/right_big_guide"
             app:layout_constraintStart_toStartOf="@+id/left_big_guide"
@@ -68,7 +68,7 @@
             style="@style/search_track_item_title_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="@dimen/audioplayer_title_margin_top"
             android:fontFamily="@font/ys_display_medium"
             android:textSize="@dimen/text_header_size"
             app:layout_constraintEnd_toStartOf="@+id/right_big_guide"
@@ -81,9 +81,9 @@
             style="@style/search_track_item_title_style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/audioplayer_subtitle_margin_top"
             android:fontFamily="@font/ys_display_medium"
-            android:textSize="14sp"
+            android:textSize="@dimen/audioplayer_features_text_size"
             app:layout_constraintEnd_toStartOf="@+id/right_big_guide"
             app:layout_constraintStart_toStartOf="@+id/left_big_guide"
             app:layout_constraintTop_toBottomOf="@id/track_name"
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/audioplayer_button_margin_top"
 
             android:scaleType="center"
 
@@ -152,7 +152,7 @@
             android:fontFamily="@font/ys_display_medium"
             android:text="0:30"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="@dimen/audioplayer_features_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/play_button"
@@ -163,7 +163,7 @@
             style="@style/audioplayer_features_title_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/audioplayer_features_margin_top"
             android:text="@string/track_feature_duration"
             app:layout_constraintStart_toEndOf="@id/left_small_guide"
             app:layout_constraintTop_toBottomOf="@id/playback_progress" />

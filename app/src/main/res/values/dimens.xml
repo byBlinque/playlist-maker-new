@@ -30,6 +30,13 @@
     <dimen name="audioplayer_features_margin_top_size">16dp</dimen>
     <dimen name="audioplayer_features_text_size">14sp</dimen>
 
+    <dimen name="audioplayer_padding_bot_size">28dp</dimen>
+    <dimen name="toolbar_arrow_max_width">16dp</dimen>
+    <dimen name="audioplayer_poster_margin_top">46dp</dimen>
+    <dimen name="audioplayer_title_margin_top">24dp</dimen>
+    <dimen name="audioplayer_subtitle_margin_top">12dp</dimen>
+    <dimen name="audioplayer_button_margin_top">30dp</dimen>
+    <dimen name="audioplayer_features_margin_top">30dp</dimen>
 
 
 </resources>

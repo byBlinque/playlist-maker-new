@@ -15,13 +15,24 @@ import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+    lateinit var trackName: TextView
+    lateinit var selectedTrack: Track
+    lateinit var artistName: TextView
+    lateinit var trackCover: ImageView
+    lateinit var backButton: ImageView
+    lateinit var playbackProgress: TextView
+    lateinit var duration: TextView
+    lateinit var album: TextView
+    lateinit var releaseDate: TextView
+    lateinit var genre: TextView
+    lateinit var country: TextView
 
 class AudioPlayerActivity : AppCompatActivity() {
     companion object {
         const val PLAYED_TRACK = "PLAYED_TRACK"
     }
 
-    val trackName: TextView = findViewById(R.id.track_name)
+    /*val trackName: TextView = findViewById(R.id.track_name)
     var selectedTrack: Track = Gson().fromJson(intent?.getStringExtra("selectedTrack"), Track::class.java)
     val artistName: TextView = findViewById(R.id.artist_name)
     val trackCover: ImageView = findViewById(R.id.track_cover)
@@ -31,12 +42,24 @@ class AudioPlayerActivity : AppCompatActivity() {
     val album: TextView = findViewById(R.id.album_value)
     val releaseDate: TextView = findViewById(R.id.release_date_value)
     val genre: TextView = findViewById(R.id.genre_value)
-    val country: TextView = findViewById(R.id.country_value)
+    val country: TextView = findViewById(R.id.country_value)*/
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_audio_player)
+
+        trackName = findViewById(R.id.track_name)
+        selectedTrack = Gson().fromJson(intent?.getStringExtra("selectedTrack"), Track::class.java)
+        artistName = findViewById(R.id.artist_name)
+        trackCover = findViewById(R.id.track_cover)
+        backButton = findViewById(R.id.back_btn)
+        playbackProgress = findViewById(R.id.playback_progress)
+        duration = findViewById(R.id.duration_value)
+        album = findViewById(R.id.album_value)
+        releaseDate = findViewById(R.id.release_date_value)
+        genre = findViewById(R.id.genre_value)
+        country = findViewById(R.id.country_value)
 
         trackName.setText(selectedTrack.trackName)
         artistName.setText(selectedTrack.artistName)
@@ -63,6 +86,7 @@ class AudioPlayerActivity : AppCompatActivity() {
             .into(trackCover)
 
         backButton.setOnClickListener {
+            SearchHistory(sharedPrefs = getSharedPreferences(TRACKS_HISTORY_KEY, MODE_PRIVATE)).updateLocalTrackHistory()
             finish()
         }
     }

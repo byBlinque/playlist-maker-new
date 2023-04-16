@@ -120,8 +120,9 @@ class SearchActivity : AppCompatActivity() {
             searchTrackRV.visibility = View.GONE
             clearAdapter()
             turnOffErrors()
+
+            SearchHistory(sharedPrefs).updateLocalTrackHistory()
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
-            Log.d("LISTENER", SearchHistory.tracksHistoryList[0].toString())
             searchHistoryLayout.visibility =
                 if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
             searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
