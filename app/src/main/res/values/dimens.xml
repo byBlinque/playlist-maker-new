@@ -12,16 +12,31 @@
     <dimen name="settings_menu_item_padding_horizontal">16dp</dimen>
 
     <dimen name="toolbar_margin">20dp</dimen>
-    <dimen name="search_image_size">12dp</dimen>
+    <dimen name="search_image_size">18dp</dimen>
     <dimen name="search_image_margin">12dp</dimen>
 
     <dimen name="search_track_item_small_margin">8dp</dimen>
-    <dimen name="search_track_item_title_size">16dp</dimen>
-    <dimen name="search_track_item_subtitle_size">11dp</dimen>
+    <dimen name="search_track_item_title_size">16sp</dimen>
+    <dimen name="search_track_item_subtitle_size">11sp</dimen>
+    <dimen name="search_track_cover_corner_size">2dp</dimen>
 
     <dimen name="button_text_margin_horizontal">14dp</dimen>
     <dimen name="button_text_margin_vertical">10dp</dimen>
 
+    <dimen name="audioplayer_big_guide_size">24dp</dimen>
+    <dimen name="audioplayer_small_guide_size">16dp</dimen>
+    <dimen name="audioplayer_track_cover_corner_size">8dp</dimen>
+
+    <dimen name="audioplayer_features_margin_top_size">16dp</dimen>
+    <dimen name="audioplayer_features_text_size">14sp</dimen>
+
+    <dimen name="audioplayer_padding_bot_size">28dp</dimen>
+    <dimen name="toolbar_arrow_max_width">16dp</dimen>
+    <dimen name="audioplayer_poster_margin_top">46dp</dimen>
+    <dimen name="audioplayer_title_margin_top">24dp</dimen>
+    <dimen name="audioplayer_subtitle_margin_top">12dp</dimen>
+    <dimen name="audioplayer_button_margin_top">30dp</dimen>
+    <dimen name="audioplayer_features_margin_top">30dp</dimen>
 
 
 </resources>

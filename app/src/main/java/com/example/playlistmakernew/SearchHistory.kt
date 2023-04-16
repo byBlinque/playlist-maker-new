@@ -51,5 +51,6 @@ class SearchHistory(val sharedPrefs: SharedPreferences) {
     companion object {
         val TRACKS_HISTORY_SIZE = 10
         var tracksHistoryList = mutableListOf<Track>()
+        var selectedTrackFlag = false
     }
 }

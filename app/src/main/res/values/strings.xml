@@ -24,4 +24,10 @@
     <string name="your_searches">Вы искали</string>
     <string name="clear_tracks_history">Очистить историю</string>
 
+    <string name="track_feature_duration">Длительность</string>
+    <string name="track_feature_album">Альбом</string>
+    <string name="track_feature_release_year">Год</string>
+    <string name="track_feature_genre">Жанр</string>
+    <string name="track_feature_country">Страна</string>
+
 </resources>

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -78,6 +79,8 @@ class SearchActivity : AppCompatActivity() {
         SearchHistory(sharedPrefs).updateLocalTrackHistory()
 
         searchET.setText(searchText)
+        searchHistoryLayout.visibility =
+            if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
 
         searchTrackRV.layoutManager = LinearLayoutManager(this)
         searchTrackAdapter = SearchTrackAdapter(trackArray, sharedPrefs)
@@ -87,19 +90,22 @@ class SearchActivity : AppCompatActivity() {
         searchHistoryAdapter = SearchTrackAdapter(SearchHistory.tracksHistoryList, sharedPrefs)
         searchHistoryRV.adapter = searchHistoryAdapter
 
+        SearchHistory.selectedTrackFlag = false
+
         sharedPrefs.registerOnSharedPreferenceChangeListener { sharedPreferences, key ->
-            //Log.d("LISTENER", "Пришли")
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
         }
 
         searchET.setOnFocusChangeListener { view, hasFocus ->
-            searchHistoryLayout.visibility = if (hasFocus && searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchHistoryLayout.visibility =
+                if (hasFocus && searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
         }
 
         clearHistoryBtn.setOnClickListener {
             SearchHistory(sharedPrefs).clearSearchHistory()
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
-            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchHistoryLayout.visibility =
+                if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
             searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
         }
 
@@ -114,8 +120,11 @@ class SearchActivity : AppCompatActivity() {
             searchTrackRV.visibility = View.GONE
             clearAdapter()
             turnOffErrors()
+
+            SearchHistory(sharedPrefs).updateLocalTrackHistory()
             searchHistoryAdapter.updateAdapter(SearchHistory.tracksHistoryList)
-            searchHistoryLayout.visibility = if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+            searchHistoryLayout.visibility =
+                if (searchET.text.isEmpty() && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
             searchTrackRV.visibility = if (searchET.text.isEmpty()) View.GONE else View.VISIBLE
         }
 
@@ -126,6 +135,7 @@ class SearchActivity : AppCompatActivity() {
         searchET.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 request(searchET.text.toString())
+                searchHistoryRV.visibility = View.GONE
                 searchTrackRV.visibility = View.VISIBLE
                 true
             }
@@ -145,7 +155,8 @@ class SearchActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 clearButton.visibility = clearButtonVisibility(s)
                 searchText = s.toString()
-                searchHistoryLayout.visibility = if (searchET.hasFocus() && s?.isEmpty() == true && (SearchHistory.tracksHistoryList.size>0)) View.VISIBLE else View.GONE
+                searchHistoryLayout.visibility =
+                    if (searchET.hasFocus() && s?.isEmpty() == true && (SearchHistory.tracksHistoryList.size > 0)) View.VISIBLE else View.GONE
                 searchTrackRV.visibility = if (s?.isEmpty() == true) View.GONE else View.VISIBLE
             }
 
@@ -208,6 +219,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun clearAdapter() {
         trackArray.clear()
+        searchTrackAdapter.updateAdapter(trackArray)
         searchTrackAdapter.notifyDataSetChanged()
     }
 
@@ -226,13 +238,11 @@ class SearchActivity : AppCompatActivity() {
 
                             trackArray.addAll(response.body()?.results!!)
                             searchTrackAdapter.notifyDataSetChanged()
-                        }
-                        else {
+                        } else {
                             turnOffErrors()
                             if (isUsingNightModeResources()) {
                                 nothingFoundDark.visibility = View.VISIBLE
-                            }
-                            else {
+                            } else {
                                 nothingFoundLight.visibility = View.VISIBLE
                             }
                             nothingFoundTV.visibility = View.VISIBLE
@@ -245,8 +255,7 @@ class SearchActivity : AppCompatActivity() {
                     clearAdapter()
                     if (isUsingNightModeResources()) {
                         internetConnectionDark.visibility = View.VISIBLE
-                    }
-                    else {
+                    } else {
                         internetConnectionLight.visibility = View.VISIBLE
                     }
                     internetConnectionTV.visibility = View.VISIBLE
